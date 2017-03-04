@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Request;
 
 class RegisterController extends Controller
 {
@@ -62,10 +63,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        var_dump($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phonenumber' => $data['phonenumber'],
             'password' => bcrypt($data['password']),
+            'last_ip_address' => Request::ip()
         ]);
     }
 }
